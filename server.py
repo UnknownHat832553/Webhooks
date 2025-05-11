@@ -18,3 +18,5 @@ def run():
 def server_on():
     t = Thread(target=run)
     t.start()
+
+server_on()
