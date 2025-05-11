@@ -13,5 +13,4 @@ if __name__ == "__main__":
     for process in processes:
         process.wait()
 
-WEBHOOK_URL = os.getenv("WEBHOOK_URL")
 server_on()
