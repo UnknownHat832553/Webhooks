@@ -1,7 +1,7 @@
 import requests
 import schedule
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 import pytz
 
 WEBHOOK_URL = "https://discord.com/api/webhooks/1369696308255789087/kT8rUk5ipDa5QF0ndZAeru0pb2bDysUDkMD-Clzjoj52UL9sqfsh7CmIBq1h4kP_H6FT"
@@ -9,6 +9,7 @@ NEWS_API_KEY = "51ff845da43d4f89945619257c764ce4"
 NEWS_URL = f"https://newsapi.org/v2/top-headlines?country=th&apiKey={NEWS_API_KEY}"
 
 def news():
+    print("รัน news แล้วจ้า!", datetime.now().strftime("%H:%M:%S"))
     response = requests.get(NEWS_URL)
     data = response.json()
 
@@ -37,7 +38,9 @@ def news():
         }
         requests.post(WEBHOOK_URL, json=payload)
 
-schedule.every().day.at("06:00").do(news)
+test_time = (datetime.now() + timedelta(minutes=1)).strftime("%H:%M")
+print(f"จะเทสต์ส่งข่าวตอน: {test_time}")
+schedule.every().day.at(test_time).do(news)
 
 while True:
     schedule.run_pending()
